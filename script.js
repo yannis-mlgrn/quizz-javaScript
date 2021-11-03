@@ -5,7 +5,7 @@ var score = 0 ;
 var questionsChoisis = [] ;
 
 // format = [ "bonne réponse" , "question" , "rep1" , "rep2" , "rep3" , "rep4"]
-questions = [
+listeQuestions = [
     {
         question : "0001 en binaire représente en base de 10 :",
         rep1 : '8' ,
@@ -116,20 +116,13 @@ let rep2 = document.querySelector('#rep2-label');
 let rep3 = document.querySelector('#rep3-label');
 let rep4 = document.querySelector('#rep4-label');
 
-function choixQuestions() {  // fonction permettant de sélectionner les questions 
-    debugger
-    while ( questionsChoisis.length <= 9 ) { // tant qu'on a pas les 10 questions 
-        const random = questions[Math.floor(Math.random() * questions.length)] // choisir une question entre toute ceux entrées
-        if( !questionsChoisis.includes(random) ){ // si elle n'a pas deja été choisie
-            questionsChoisis.push(random); // la rajouter dans la liste des questions deja utillisées
-            question = random;
-            affichageQuestion(question);
-        }
+function quiz() {  // fonction permettant de sélectionner les questions 
+    const random = listeQuestions[Math.floor(Math.random() * listeQuestions.length)] // choisir une question entre toute ceux entrées
+    const question = random;
+    var index = listeQuestions.indexOf(random);
+    if (index > -1) {
+      listeQuestions.splice(index, 1);
     }
-    return question , questionsChoisis ;
-}
-
-function affichageQuestion(question){
     nbrQuestion.innerHTML = nombreQuestion ;
     questionText.innerHTML = question.question ;
     scoreHtml.innerHTML = score ;
@@ -137,6 +130,7 @@ function affichageQuestion(question){
     rep2.innerHTML = question.rep2 ; 
     rep3.innerHTML = question.rep3 ; 
     rep4.innerHTML = question.rep4; 
+    return question ;
 
 }
 
@@ -167,9 +161,9 @@ function verification(question){
     setTimeout(function () {
         document.getElementById(correctOption).style.backgroundColor = "" ;
         document.getElementById(reponseSelectionner).style.backgroundColor = "" ;
-        delete question ;
-        choixQuestions();
     }, 2000);
 }
 
-choixQuestions();
+while(nombreQuestion <= 10){
+    quiz();
+}
