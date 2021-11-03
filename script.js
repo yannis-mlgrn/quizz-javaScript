@@ -118,8 +118,8 @@ let rep4 = document.querySelector('#rep4-label');
 
 function quiz() {  // fonction permettant de sélectionner les questions 
     const random = listeQuestions[Math.floor(Math.random() * listeQuestions.length)] // choisir une question entre toute ceux entrées
-    const question = random;
-    var index = listeQuestions.indexOf(random);
+    question = random
+    var index = listeQuestions.indexOf(question);
     if (index > -1) {
       listeQuestions.splice(index, 1);
     }
@@ -130,7 +130,6 @@ function quiz() {  // fonction permettant de sélectionner les questions
     rep2.innerHTML = question.rep2 ; 
     rep3.innerHTML = question.rep3 ; 
     rep4.innerHTML = question.rep4; 
-    return question ;
 
 }
 
