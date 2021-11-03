@@ -117,8 +117,8 @@ let rep3 = document.querySelector('#rep3-label');
 let rep4 = document.querySelector('#rep4-label');
 
 function choixQuestions() {  // fonction permettant de sélectionner les questions 
-    debugger;
-    while ( questionsChoisis <= 9 ) { // tant qu'on a pas les 10 questions 
+    debugger
+    while ( questionsChoisis.length <= 9 ) { // tant qu'on a pas les 10 questions 
         const random = questions[Math.floor(Math.random() * questions.length)] // choisir une question entre toute ceux entrées
         if( !questionsChoisis.includes(random) ){ // si elle n'a pas deja été choisie
             questionsChoisis.push(random); // la rajouter dans la liste des questions deja utillisées
@@ -167,7 +167,7 @@ function verification(question){
     setTimeout(function () {
         document.getElementById(correctOption).style.backgroundColor = "" ;
         document.getElementById(reponseSelectionner).style.backgroundColor = "" ;
-        question = null
+        delete question ;
         choixQuestions();
     }, 2000);
 }
