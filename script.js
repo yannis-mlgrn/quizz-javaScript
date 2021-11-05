@@ -116,7 +116,7 @@ let rep2 = document.querySelector('#rep2-label');
 let rep3 = document.querySelector('#rep3-label');
 let rep4 = document.querySelector('#rep4-label');
 
-function quiz() {  // fonction permettant de sélectionner les questions 
+function displayNextQuestion() {  // fonction permettant de sélectionner les questions 
     const random = listeQuestions[Math.floor(Math.random() * listeQuestions.length)] // choisir une question entre toute ceux entrées
     question = random
     var index = listeQuestions.indexOf(question);
@@ -149,6 +149,8 @@ function verification(question){
             document.getElementById(correctOption).style.backgroundColor = "green" ;
             score++
             nombreQuestion++
+
+            displayNextQuestion();
         }if(option.checked === true && option.value != bonneReponseActuelle){
             reponseSelectionner = option.labels[0].id ;
             document.getElementById(correctOption).style.backgroundColor = "green" ;
@@ -163,6 +165,4 @@ function verification(question){
     }, 2000);
 }
 
-while(nombreQuestion <= 10){
-    quiz();
-}
+displayNextQuestion();
