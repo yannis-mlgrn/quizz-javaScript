@@ -103,6 +103,31 @@ listeQuestions = [
         rep4 : '128',
         reponse : 'rep2'
     },
+    {
+        question : "L'entier positif 255 se représente en héxadécimal (base 16) par :",
+        rep1 : '99' ,
+        rep2 : 'AA',
+        rep3 : 'CC',
+        rep4 : 'FF',
+        reponse : 'rep4'
+    },
+    {
+        question : "Quelle est la séquence de bit qui représente -25 en complément à 2 sur 8 bits ?",
+        rep1 : '0001 1001' ,
+        rep2 : '0001 1010',
+        rep3 : '1110 0110',
+        rep4 : '1110 0111',
+        reponse : 'rep4'
+    },
+    {
+        question : "Combien de valeurs entières positives ou nulles un octet peut représenter ? ",
+        rep1 : '8' ,
+        rep2 : '2',
+        rep3 : '256',
+        rep4 : '128',
+        reponse : 'rep3'
+    },
+
 
     
         
