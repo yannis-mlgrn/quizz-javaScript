@@ -1,4 +1,5 @@
 *{
+    /*marges*/
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -8,25 +9,25 @@ html, body{
     height: 100%;
 }
 
-
+/* chargement de la police */
 body{
     font-family: 'Montserrat', serif;
 
 }
 
+/* toute la partie du jeu ( questions, options, score, nombre de question)*/
 main{
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: black;
-    background: url('../assets/background_image.jpg'); /* à remplacer */
-    background-color : black;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
+    width: 100%; /* largeur*/
+    min-height: 100vh; /* hauteur minimale*/
+    display: flex; /* flexible ( permet d'avoir une page responsive)*/
+    flex-direction: column; /*organiser en colonnes */
+    justify-content: center; /* centrer l'élément*/
+    align-items: center; /* centrer les éléments de main*/
+    background-color: black; /* mettre le fond en noir ( si l'image ne se charge pas)*/
+    background: url('background.jpg'); /* ajout d'une image comme background*/
+    background-repeat: no-repeat; /* ne pas répéter l'image*/
+    background-size: cover; /* image recouvre totalement la fenêtre*/
+    background-position: center; /* centre l'image*/
 }
 
 .contenuQuiz{
@@ -36,11 +37,11 @@ main{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-around; /* séparer les éléments*/
     border-radius: 30px;
 }
 
-.game-details-container{
+.divScoreEtQuestion{
     width: 80%;
     height: 4rem;
     display: flex;
@@ -48,8 +49,8 @@ main{
     align-items: center;
 }
 
-.game-details-container h1{
-    font-size: 1.2rem;
+.divScoreEtQuestion h1{
+    font-size: 1.2rem; /* taille du texte*/
 }
 
 .divQuestion {
@@ -63,16 +64,16 @@ main{
 }
 
 .divQuestion  h1{
-    font-size: 1.1rem;
-    text-align: center;
-    padding: 3px;
+    font-size: 1.1rem; /* taille du texte */
+    text-align: center; /* centrer le texte*/
+    padding: 3px; /*mettre un espace de minimum 2 pixel entre chaques éléments*/
 }
 
 .divOptions{
     width: 80%;
     height: 12rem;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* affiche les éléments dans la div avec un retour chariot (touche entrée) automatiquement */
     align-items: center;
     justify-content: space-around;
 }
@@ -82,7 +83,7 @@ main{
     height: 3rem;
     border: 2px solid darkgray;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: hidden; /* empêche que le texte inscrit dans l'option puisse dépasser de celle ci ( peut nuir à la visibilité mais est plus joli )*/
 }
 span label{
     width: 100%;
@@ -91,50 +92,54 @@ span label{
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: transform 0.3s; /*transition 0.3s */
     font-weight: 600;
     color: rgb(22, 22, 22);
 }
 
 span label:hover{
-    -ms-transform: scale(1.12);
+    -ms-transform: scale(1.12); /*grossisment*/
     -webkit-transform: scale(1.12);
     transform: scale(1.12);
-    color: white;
+    color: white; /* mettre le texte en blanc*/
 }
 
 input[type="radio"] {
-    position: relative;
+    position: relative; 
     display: none;
 }
 
 
 input[type=radio]:checked ~ .option { /* quand l'input est selectionné */
-    background: #fafa08;
+    background: #fafa08; /*le mettre en jaune pastel*/
 }
 
-.buttonSuivant{
+.bouttonSuivant{
     width: 50%;
     height: 3rem;
     display: flex;
     justify-content: center;
 }
-.buttonSuivant button{
-    width: 8rem;
-    height: 2rem;
-    border-radius: 10px;
-    background: none;
-    color: rgb(25, 25, 25);
-    font-weight: 600;
-    border: 2px solid gray;
-    cursor: pointer;
+
+/* css du boutton pour passer a la question suivante */ 
+.bouttonSuivant button{
+    width: 8rem; /* largeur */
+    height: 2rem; /* hauteur*/
+    border-radius: 10px; /* taille des arrondis bordure */
+    background: none; /* pas de background*/
+    color: rgb(25, 25, 25); /*oculeur */
+    font-weight: 600; /* largeur des lettres (gras)*/
+    border: 2px solid gray; /* Taille bordur et sa couleur*/
+    cursor: pointer; 
     outline: none;
 }
-.buttonSuivant button:hover{
+
+/* mettre le background du boutton en gris lorsque qu'on pose le pointeur de la souris dessus */ 
+.bouttonSuivant button:hover{
     background-color: #929292;
 }
 
-.modal-container{
+.popupFin{
     display: none;
     position: fixed;
     z-index: 1; 
@@ -152,7 +157,7 @@ input[type=radio]:checked ~ .option { /* quand l'input est selectionné */
     animation: fadeIn 1.2s ease-in-out;
 }
 
-.modal-content-container{
+.contenuPopupFin{
     height: 20rem;
     width: 25rem;
     background-color: rgb(43, 42, 42);
@@ -163,14 +168,14 @@ input[type=radio]:checked ~ .option { /* quand l'input est selectionné */
     border-radius: 25px;
 }
 
-.modal-content-container h1{
+.contenuPopupFin h1{
     font-size: 1.3rem;
     height: 3rem;
     color: lightgray;
     text-align: center;
 }
 
-.grade-details{
+.resultats{
     width: 15rem;
     height: 10rem;
     display: flex;
@@ -179,98 +184,12 @@ input[type=radio]:checked ~ .option { /* quand l'input est selectionné */
     justify-content: space-around;
 }
 
-.grade-details p{
+.resultats p{
     color: white;
     text-align: center;
 }
 
-.modal-button-container{
-    height: 2rem;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.modal-button-container button{
-    width: 10rem;
-    height: 2rem;
-    background: none;
-    outline: none;
-    border: 1px solid rgb(252, 242, 241);
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    border-radius: 20px;
-}
-.modal-button-container button:hover{
-    background-color: rgb(83, 82, 82);
-}
-
-@media(min-width : 300px) and (max-width : 350px){
-    .contenuQuiz{
-        width: 90%;
-        height: 80vh;
-     }
-     .game-details-container h1{
-        font-size: 0.8rem;
-     }
-
-     .divQuestion {
-        height: 6rem;
-     }
-     .divQuestion  h1{
-       font-size: 0.9rem;
-    }
-
-    .divOptions span{
-        width: 90%;
-        height: 2.5rem;
-    }
-    .divOptions span label{
-        font-size: 0.8rem;
-    }
-    .modal-content-container{
-        width: 90%;
-        height: 25rem;
-    }
-
-    .modal-content-container h1{
-        font-size: 1.2rem;
-    }
-}
-
-@media(min-width : 350px) and (max-width : 700px){
-   .contenuQuiz{
-       width: 90%;
-       height: 80vh;
-    }
-    .game-details-container h1{
-        font-size: 1rem;
-    }
-
-    .divQuestion {
-        height: 8rem;
-    }
-
-    .divQuestion  h1{
-        font-size: 0.9rem;
-     }
-
-    .divOptions span{
-        width: 90%;
-    }
-    .modal-content-container{
-        width: 90%;
-        height: 25rem;
-    }
-    .modal-content-container h1{
-        font-size: 1.2rem;
-    }
-}
-
-
-
+/* animation du fondu lorsque la popup apparait */
 @keyframes fadeIn {
     from {opacity: 0;}
     to {opacity:1 ;}

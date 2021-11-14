@@ -1,10 +1,11 @@
+// initialisation des variables necessaire au fonctionnement du script 
 var nombreQuestion = 1 ;
 var bonneReponse = 0 ;
 var mauvaiseReponse = 0
 var score = 0 ;
-var questionsChoisis = [] ;
 
-// format = [ "bonne réponse" , "question" , "rep1" , "rep2" , "rep3" , "rep4"]
+
+// questions regroupés dans un tableau 
 listeQuestions = [
     {
         question : "0001 en binaire représente en base de 10 :",
@@ -106,7 +107,8 @@ listeQuestions = [
     
         
 ];
- // chargement des balises a manipuler en javaScript
+
+ // chargement des balises des options a manipuler en javaScript
 let nbrQuestion = document.querySelector('#nbrQuestion');
 let scoreHtml = document.querySelector('#scoreText');
 
@@ -117,52 +119,82 @@ let rep3 = document.querySelector('#rep3-label');
 let rep4 = document.querySelector('#rep4-label');
 
 function displayNextQuestion() {  // fonction permettant de sélectionner les questions 
-    const random = listeQuestions[Math.floor(Math.random() * listeQuestions.length)] // choisir une question entre toute ceux entrées
-    question = random
-    var index = listeQuestions.indexOf(question);
-    if (index > -1) {
-      listeQuestions.splice(index, 1);
+   
+    // tant que le joueur n'est pas arrivé à lne finit pas le quiz ( les 10 questions )
+    if (nombreQuestion <= 10){
+        const random = listeQuestions[Math.floor(Math.random() * listeQuestions.length)] // choisir une question entre toute ceux entrées
+        question = random
+        // supprimer la question selectionnée pour ne plus pouvoir l'avoir durant le jeux
+        var index = listeQuestions.indexOf(question);
+        if (index > -1) {
+        listeQuestions.splice(index, 1);
+        }
+        // affichage du contenu de la question et de ses options 
+        nbrQuestion.innerHTML = nombreQuestion ;
+        questionText.innerHTML = question.question ;
+        scoreHtml.innerHTML = score ;
+        rep1.innerHTML = question.rep1 ; 
+        rep2.innerHTML = question.rep2 ; 
+        rep3.innerHTML = question.rep3 ; 
+        rep4.innerHTML = question.rep4; 
+    }else{
+        // apres 0.5s afficher la popup avec les résultats
+        setTimeout(function () {
+            const pourcentage = (score / 10) * 100 // calcul du pourcentage de réussite
+            document.getElementById('pourcentageReussiteHTML').innerHTML = pourcentage
+            document.getElementById('MauvaiseRepPopup').innerHTML = mauvaiseReponse
+            document.getElementById('bonneRepPopup').innerHTML = bonneReponse
+            document.getElementById('popupFinId').style.display = "flex"
+        }, 500); // temps en ms 
     }
-    nbrQuestion.innerHTML = nombreQuestion ;
-    questionText.innerHTML = question.question ;
-    scoreHtml.innerHTML = score ;
-    rep1.innerHTML = question.rep1 ; 
-    rep2.innerHTML = question.rep2 ; 
-    rep3.innerHTML = question.rep3 ; 
-    rep4.innerHTML = question.rep4; 
-
 }
 
-function verification(question){
+// fonction pour vérifier si l'option sélectionnée est la bonne ou pas 
+function verification(question){ 
+    // on récupère les options dans le html
     const options = document.getElementsByName("option");
-    const bonneReponseActuelle = question.reponse;
-    let correctOption = null
-    options.forEach((option) => {
-        if (option.value === bonneReponseActuelle) {
-            //get's correct's radio input with correct answer
-            correctOption = option.labels[0].id ;
+    const bonneReponseActuelle = question.reponse; // la bonne réponse est celle de la question sélectionnée dans la liste
+    let bonneOption = null // on initialise la bonne réponse 
+    
+    options.forEach((option) => { // parcours de toute les options qui ont l'id "option"
+        if (option.value === bonneReponseActuelle) { // si une des options dans le html a la même valeur que la bonne réponse de la question sélectionnée
+            bonneOption = option.labels[0].id ; // on récupère l'id de la bonne option 
+            // cette boucle va servir a déterminer quelle option est la bonne dans le html et donc pouvoir la manipuler ( mettre le background en vert )
         }
     })
-    options.forEach((option) => {
 
+    options.forEach((option) => { // on parcours encore une fois toutes les options
+
+        // si l'option est sélectionnnée par le joueur et que elle correspond à la bonne réponse de la question 
         if (option.checked === true && option.value === bonneReponseActuelle) {
-            document.getElementById(correctOption).style.backgroundColor = "green" ;
+            reponseSelectionner = option.labels[0].id ; // récupère l'id de la question selectionnée
+            document.getElementById(bonneOption).style.backgroundColor = "green" ; // on met le background de l'option en vert 
+            // on ajoute 1 au score , au nombre de questions et aux bonnes réponses
             score++
             nombreQuestion++
-
-            displayNextQuestion();
+            bonneReponse++
+            displayNextQuestion();// passage à la question suivante 
+        
+        // sinon en cas de mauvaise réponse ( si la veleur de l'option sélectionnée n'est pas la même que la réponse à la question )
         }if(option.checked === true && option.value != bonneReponseActuelle){
-            reponseSelectionner = option.labels[0].id ;
-            document.getElementById(correctOption).style.backgroundColor = "green" ;
+            reponseSelectionner = option.labels[0].id ;  // récupère l'id de la question selectionnée
+            // mettre le background de la bonnne option en vert et celle sélectionnée en rouge 
+            document.getElementById(bonneOption).style.backgroundColor = "green" ;
             document.getElementById(reponseSelectionner).style.backgroundColor = "red" ;
+            // on ajoute 1 au nombre de questions et aux bonnes réponses
             nombreQuestion++
+            mauvaiseReponse++
+            displayNextQuestion(); // passage à la question suivante 
        }
     })
-
+    
+    // reset du background des options AVANT de passer à la suivante 
     setTimeout(function () {
-        document.getElementById(correctOption).style.backgroundColor = "" ;
+        document.getElementById(bonneOption).style.backgroundColor = "" ; 
         document.getElementById(reponseSelectionner).style.backgroundColor = "" ;
     }, 2000);
 }
 
+// lancement du jeux 
 displayNextQuestion();
+

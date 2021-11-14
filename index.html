@@ -8,60 +8,45 @@
     
     <body>
         <main>
-            <!-- creating a modal for when quiz ends -->
-            <div class="modal-container" id="score-modal">
+            <!-- popup lorsque le joueur finit le quizz pour afficher les résultats -->
+            <div class="popupFin" id="popupFinId">
     
-                <div class="modal-content-container">
+                <div class="contenuPopupFin">
     
                     <h1>Bravo, quizz fini !</h1>
-    
-                    <div class="grade-details">
+                    
+                    <!-- Résultats -->
+                    <div class="resultats">
                         <p>Questions : 10</p>
-                        <p>Mauvaises réponses : <span id="wrong-answers"></span></p>
-                        <p>bonnes réponses : <span id="right-answers"></span></p>
-                        <p>réussite : <span id="grade-percentage"></span>%</p>
-                        <p ><span id="remarks"></span></p>
+                        <p>Mauvaises réponses : <span id="MauvaiseRepPopup"></span></p>
+                        <p>bonnes réponses : <span id="bonneRepPopup"></span></p>
+                        <p>réussite : <span id="pourcentageReussiteHTML"></span>%</p>
                     </div>
-    
-                    <div class="modal-button-container">
-                        <button onclick="closeScoreModal()">Continuer</button>
-                    </div>
-    
                 </div>
             </div>
-    <!-- end of modal of quiz details-->
-    
+            
+            <!-- div du quizz qui contient la question, les options et les details ( score et nombres de questions )-->
             <div class="contenuQuiz">
-    
-                <div class="game-details-container">
+                
+                <!-- Affichage du nombre de questions et du score sur 10 -->
+                <div class="divScoreEtQuestion">
                     <h1>Score : <span id="scoreText"></span> / 10</h1>
                     <h1> Question : <span id="nbrQuestion"></span> / 10</h1>
                 </div>
-    
+                
+                <!-- Div contenant le texte de la question-->
                 <div class="divQuestion ">
-                    <h1 id="questionText"></h1>
+                    <h1 id="questionText"></h1> <!-- Texte de la question -->
                 </div>
-    
+                
+                <!-- Div contenant les options -->
                 <div class="divOptions">
-    
-                   <div class="modal-container" id="option-modal">
-    
-                        <div class="modal-content-container">
-                             <h1>veuillez choisir une question</h1>
-    
-                             <div class="modal-button-container">
-                                <button onclick="closeOptionModal()">Continuer</button>
-                            </div>
-    
-                        </div>
-    
-                   </div>
-    
+ 
                     <span>
+                        <!-- chaque option est un input radio modifié par du css-->
                         <input type="radio" id="rep1" name="option" class="radio" value="rep1" />
-                        <label for="rep1" class="option" id="rep1-label"></label>
+                        <label for="rep1" class="option" id="rep1-label"></label> <!-- le texte de l'option est un label ( plus facile a manipuler avec le javaScript)-->
                     </span>
-    
     
                     <span>
                         <input type="radio" id="rep2" name="option" class="radio" value="rep2" />
@@ -82,15 +67,17 @@
     
     
                 </div>
-    
-                <div class="buttonSuivant">
+                
+                <!-- Boutton permettant de passer à la question suivante -->
+                <div class="bouttonSuivant">
                     <button onclick=" verification(question)">Question suivante</button>
                 </div>
     
             </div>
         </main>
+        <!-- Importation du javaScript -->
         <script src="script.js"></script>
+        
     </body>
-    
-    
+
 </html>
