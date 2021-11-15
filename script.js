@@ -4,7 +4,6 @@ var bonneReponse = 0 ;
 var mauvaiseReponse = 0
 var score = 0 ;
 
-
 // questions regroupés dans un tableau 
 listeQuestions = [
     {
@@ -198,7 +197,9 @@ function verification(question){
             score++
             nombreQuestion++
             bonneReponse++
-            displayNextQuestion();// passage à la question suivante 
+            setTimeout(function () {
+                displayNextQuestion(); // passage à la question suivante 
+            }, 1000);
         
         // sinon en cas de mauvaise réponse ( si la veleur de l'option sélectionnée n'est pas la même que la réponse à la question )
         }if(option.checked === true && option.value != bonneReponseActuelle){
@@ -209,7 +210,9 @@ function verification(question){
             // on ajoute 1 au nombre de questions et aux bonnes réponses
             nombreQuestion++
             mauvaiseReponse++
-            displayNextQuestion(); // passage à la question suivante 
+            setTimeout(function () {
+                displayNextQuestion(); // passage à la question suivante 
+            }, 1000);
        }
     })
     
@@ -217,7 +220,7 @@ function verification(question){
     setTimeout(function () {
         document.getElementById(bonneOption).style.backgroundColor = "" ; 
         document.getElementById(reponseSelectionner).style.backgroundColor = "" ;
-    }, 2000);
+    }, 1000);
 }
 
 // lancement du jeux 
